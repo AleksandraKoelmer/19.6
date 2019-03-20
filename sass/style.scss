@@ -1,0 +1,46 @@
+* {
+  font-family: 'PT Sans', sans-serif;
+}
+
+body {
+  background-color: #5068EA;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 30px;
+  padding: 10px;
+  background-color: #FFF73F;
+  text-decoration: none;
+  margin: 5px;
+}
+
+.stopwatch {
+  width: 120px;
+  height: 80px;
+  margin: auto;
+  padding: 30px;
+  font-size: 30px;
+}
+
+.controls {
+  width: 50%;
+  margin: auto;
+  display: flex;
+  justify-content: space-around;
+}
+
+ul {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  li {
+    display: block;
+    list-style-type: none;
+  }
+}
