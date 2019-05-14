@@ -11,30 +11,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var Stopwatch = function (_React$Component) {
   _inherits(Stopwatch, _React$Component);
 
-  function Stopwatch(props) {
+  function Stopwatch() {
     _classCallCheck(this, Stopwatch);
 
-    var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Stopwatch.__proto__ || Object.getPrototypeOf(Stopwatch)).call(this));
 
     _this.running = false;
-    _this.times = {
+    _this.state = {
+
       minutes: 0,
       seconds: 0,
       miliseconds: 0
     };
 
-    _this.print(_this.times);
+    _this.print(_this.state.minutes + _this.state.seconds + _this.state.miliseconds);
 
-    _this.reset = _this.reset.bind(_this);
-    _this.print = _this.print.bind(_this);
-    _this.format = _this.format.bind(_this);
     _this.start = _this.start.bind(_this);
-    _this.step = _this.step.bind(_this);
-    _this.calculate = _this.calculate.bind(_this);
     _this.restart = _this.restart.bind(_this);
     _this.stop = _this.stop.bind(_this);
-    //  this.addToList = this.addToList.bind(this);
-    //  this.clearList = this.clearList.bind(this);
 
     return _this;
   }
@@ -42,7 +36,7 @@ var Stopwatch = function (_React$Component) {
   _createClass(Stopwatch, [{
     key: 'reset',
     value: function reset() {
-      this.setState(this.times = {
+      this.setState(this.state = {
         minutes: 0,
         seconds: 0,
         miliseconds: 0
@@ -52,20 +46,20 @@ var Stopwatch = function (_React$Component) {
     key: 'print',
     value: function print() {
 
-      return this.format(this.times);
+      return this.format(this.state);
     }
   }, {
     key: 'format',
-    value: function format(times) {
+    value: function format(state) {
 
-      return pad0(times.minutes) + ':' + pad0(times.seconds) + ':' + pad0(Math.floor(times.miliseconds));
+      return pad0(state.minutes) + ':' + pad0(state.seconds) + ':' + pad0(Math.floor(state.miliseconds));
     }
   }, {
     key: 'start',
     value: function start() {
       var _this2 = this;
 
-      console.log(this.times);
+      console.log(this.state);
       if (!this.running) {
         this.running = true;
         this.watch = setInterval(function () {
@@ -78,24 +72,24 @@ var Stopwatch = function (_React$Component) {
     value: function step() {
       if (!this.running) return;
       this.calculate();
-      this.setState(this.times = {
-        minutes: this.times.minutes,
-        seconds: this.times.seconds,
-        miliseconds: this.times.miliseconds
+      this.setState(this.state = {
+        minutes: this.state.minutes,
+        seconds: this.state.seconds,
+        miliseconds: this.state.miliseconds
       });
       this.print();
     }
   }, {
     key: 'calculate',
     value: function calculate() {
-      this.times.miliseconds += 1;
-      if (this.times.miliseconds >= 100) {
-        this.times.seconds += 1;
-        this.times.miliseconds = 0;
+      this.state.miliseconds += 1;
+      if (this.state.miliseconds >= 100) {
+        this.state.seconds += 1;
+        this.state.miliseconds = 0;
       }
-      if (this.times.seconds >= 60) {
-        this.times.minutes += 1;
-        this.times.seconds = 0;
+      if (this.state.seconds >= 60) {
+        this.state.minutes += 1;
+        this.state.seconds = 0;
       }
     }
   }, {
@@ -111,20 +105,6 @@ var Stopwatch = function (_React$Component) {
       this.running = false;
       clearInterval(this.watch);
     }
-    /* addToList() {
-       if (this.times.miliseconds != 0 || this.times.seconds != 0 || this.times.miliseconds != 0) {
-         
-         let results = document.getElementByClassName('results');
-         let result = document.createElement("li");
-         
-       }
-     }
-     
-     clearList() {
-       results.innerHTML = '';
-     }
-    */
-
   }, {
     key: 'render',
     value: function render() {
